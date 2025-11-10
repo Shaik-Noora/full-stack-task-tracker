@@ -6,7 +6,9 @@ import taskRoutes from "./routes/taskRoutes.js";
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://full-stack-task-tracker.vercel.app",
+}));
 app.use(express.json());
 
 // Connect Database
