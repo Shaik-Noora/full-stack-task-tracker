@@ -6,9 +6,29 @@ import taskRoutes from "./routes/taskRoutes.js";
 
 dotenv.config();
 const app = express();
-app.use(cors({
-  origin: "https://full-stack-task-tracker.vercel.app",
-}));
+
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://full-stack-task-tracker.vercel.app",
+  "https://full-stack-task-tracker-4i7m.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
+
 app.use(express.json());
 
 // Connect Database
