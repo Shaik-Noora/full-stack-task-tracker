@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { connectDB } from "./config/db.js";
+import connectDB from "./config/db.js"; // ✅ default import, not destructured
+
 import taskRoutes from "./routes/taskRoutes.js";
 
 dotenv.config();
@@ -10,11 +11,11 @@ const app = express();
 
 // ✅ Allowed origins
 const allowedOrigins = [
-  "http://localhost:5173", // local dev
-  "https://full-stack-task-tracker-nine.vercel.app", // your live Vercel frontend
+  "http://localhost:5173",
+  "https://full-stack-task-tracker-nine.vercel.app",
 ];
 
-// ✅ Enable CORS dynamically
+// ✅ CORS setup
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -31,10 +32,10 @@ app.use(
 
 app.use(express.json());
 
-// ✅ Routes
+// ✅ API Routes
 app.use("/api/tasks", taskRoutes);
 
-// ✅ DB connection
+// ✅ Connect DB
 connectDB();
 
 const PORT = process.env.PORT || 5000;
