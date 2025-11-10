@@ -8,9 +8,10 @@ import {
 
 const router = express.Router();
 
-router.post("/tasks", addTask);
-router.get("/tasks", getTasks);
-router.patch("/tasks/:id", updateTask);
+// ✅ Corrected: no extra '/tasks' prefix
+router.post("/", addTask);
+router.get("/", getTasks);
+router.patch("/:id", updateTask);
 router.get("/insights", getInsights);
 
 export default router;
