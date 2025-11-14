@@ -44,3 +44,5 @@ export const fetchInsights = async () => {
   if (!res.ok) throw new Error("Failed to fetch insights");
   return res.json();
 };
+
+
